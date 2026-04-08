@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# About Me
 
-TODO: Document your project here
+桌面式个人主页，使用 Vite、React 和 Supabase 构建。

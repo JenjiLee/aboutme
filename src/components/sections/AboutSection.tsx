@@ -47,7 +47,7 @@ const AboutSection = () => {
         <div className="mt-4 space-y-1">
           <p className="comment-text"># 技能</p>
           <p className="text-sm">
-            熟练使用 Claude Code、Cursor、Codex、Lovable、Trae 等 AI 工具产出 demo / 数据分析结论
+            熟练使用 Claude Code、Cursor、Codex、Trae 等 AI 工具产出 demo / 数据分析结论
           </p>
           <p className="text-sm">
             有 AI 产品使用和体验的高效方法论，擅长框架推演与 debug
