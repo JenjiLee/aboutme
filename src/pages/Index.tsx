@@ -7,6 +7,7 @@ import AboutSection from "@/components/sections/AboutSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import ThoughtsSection from "@/components/sections/ThoughtsSection";
 import macWallpaper from "@/assets/mac-wallpaper.jpg";
+import pixelAvatar from "@/assets/pixel-avatar.png";
 
 const bootLines = [
   { content: <span className="comment-text"># initializing portfolio...</span>, delay: 400 },
@@ -18,9 +19,12 @@ const bootLines = [
   { content: <span className="text-muted-foreground">loading modules... </span>, delay: 400 },
   {
     content: (
-      <div className="space-y-1 mt-2">
-        <p className="text-lg font-bold text-foreground">👋 你好，我是李郁青</p>
-        <p className="text-muted-foreground">AI Product Manager · Agent 产品 · 清华硕士</p>
+      <div className="flex items-center gap-3 mt-2">
+        <img src={pixelAvatar} alt="李郁青" width={48} height={48} className="pixelated" style={{ imageRendering: "pixelated" }} />
+        <div className="space-y-1">
+          <p className="text-lg font-bold text-foreground">你好，我是李郁青</p>
+          <p className="text-muted-foreground">AI Product Manager · Agent 产品 · 清华硕士</p>
+        </div>
       </div>
     ),
     delay: 500,
