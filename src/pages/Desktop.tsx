@@ -98,7 +98,7 @@ const Desktop = () => {
               }`}
               style={{ fontFamily: "'Lucida Grande', sans-serif" }}
             >
-              李郁青.exe
+              李郁青.app
             </span>
           </div>
         </div>
@@ -118,10 +118,7 @@ const Desktop = () => {
           {["📁", "🌐", "📧", "⚙️", "🗑️"].map((icon, i) => (
             <div
               key={i}
-              className="w-10 h-10 flex items-center justify-center text-[24px] hover:scale-125 transition-transform duration-150 cursor-pointer"
-              onClick={() => {
-                if (icon === "📁") navigate("/terminal");
-              }}
+              className="w-10 h-10 flex items-center justify-center text-[24px] cursor-default opacity-80"
             >
               {icon}
             </div>
@@ -146,7 +143,7 @@ const Desktop = () => {
                 確定不想和他聊聊嗎？
               </p>
               <p className="text-[11px] text-[#666] leading-relaxed">
-                雙擊桌面上的「李郁青.exe」可以打開簡歷終端哦
+                雙擊桌面上的「李郁青.app」可以打開簡歷終端哦
               </p>
             </div>
             <div className="flex justify-center gap-3 px-6 pb-5">
