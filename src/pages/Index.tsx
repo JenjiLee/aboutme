@@ -6,6 +6,7 @@ import CommandBar from "@/components/CommandBar";
 import AboutSection from "@/components/sections/AboutSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import ThoughtsSection from "@/components/sections/ThoughtsSection";
+import macWallpaper from "@/assets/mac-wallpaper.jpg";
 
 const bootLines = [
   { content: <span className="comment-text"># initializing portfolio...</span>, delay: 400 },
@@ -25,7 +26,11 @@ const bootLines = [
     delay: 500,
   },
   {
-    content: <p className="text-sm text-muted-foreground mt-2">"最好的产品，是让用户感受不到技术的存在。"</p>,
+    content: (
+      <p className="text-sm text-muted-foreground mt-2">
+        "2年 AI PM，专注垂类 Agent 产品定义、效果优化与商业化全链路。"
+      </p>
+    ),
     delay: 400,
   },
   {
@@ -57,60 +62,44 @@ const Index = () => {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center p-4 sm:p-8"
-      style={{
-        background:
-          "linear-gradient(180deg, #245EDC 0%, #3A8BF5 30%, #87CEEB 55%, #B0E0F0 70%, #7CBA3F 70.1%, #5DA832 85%, #4A8C2A 100%)",
-      }}
-    >
-      <div className="w-full max-w-2xl">
-        {/* XP-style window title bar */}
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-8 relative">
+      {/* Mac wallpaper background */}
+      <img
+        src={macWallpaper}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+
+      <div className="w-full max-w-2xl relative z-10">
+        {/* Mac-style window title bar */}
         <div
-          className="h-[30px] flex items-center justify-between px-2 rounded-t-lg"
+          className="h-[22px] flex items-center justify-between px-3 rounded-t-lg"
           style={{
-            background: "linear-gradient(180deg, #0A246A 0%, #3A6EA5 40%, #0A246A 100%)",
+            background: "linear-gradient(180deg, rgba(200,200,200,0.95) 0%, rgba(170,170,170,0.9) 100%)",
+            backdropFilter: "blur(10px)",
+            borderBottom: "1px solid rgba(0,0,0,0.1)",
+            fontFamily: "'Lucida Grande', 'Helvetica Neue', sans-serif",
           }}
         >
-          <div className="flex items-center gap-2">
-            <span className="text-[12px]">💻</span>
-            <span className="text-white text-[12px] font-bold" style={{ fontFamily: "Tahoma, sans-serif" }}>
-              李郁青.exe — Terminal
-            </span>
-          </div>
-          <div className="flex gap-[2px]">
+          <div className="flex items-center gap-[6px]">
             <button
-              className="w-[20px] h-[20px] flex items-center justify-center text-white text-[10px] rounded-sm"
-              style={{
-                background: "linear-gradient(180deg, #3A6EA5 0%, #245EDC 100%)",
-                border: "1px solid #1B4D8C",
-              }}
-              title="最小化"
-            >
-              _
-            </button>
-            <button
-              className="w-[20px] h-[20px] flex items-center justify-center text-white text-[10px] rounded-sm"
-              style={{
-                background: "linear-gradient(180deg, #3A6EA5 0%, #245EDC 100%)",
-                border: "1px solid #1B4D8C",
-              }}
-              title="最大化"
-            >
-              □
-            </button>
-            <button
-              className="w-[20px] h-[20px] flex items-center justify-center text-white text-[11px] rounded-sm hover:brightness-125"
-              style={{
-                background: "linear-gradient(180deg, #C45156 0%, #B33B3F 100%)",
-                border: "1px solid #8B2D30",
-              }}
+              className="w-[12px] h-[12px] rounded-full bg-[#FF5F57] border border-[#E33E32] hover:brightness-90"
               title="关闭"
               onClick={handleClose}
-            >
-              ✕
-            </button>
+            />
+            <button
+              className="w-[12px] h-[12px] rounded-full bg-[#FEBC2E] border border-[#E5A00D]"
+              title="最小化"
+            />
+            <button
+              className="w-[12px] h-[12px] rounded-full bg-[#28C840] border border-[#1AAB29]"
+              title="最大化"
+            />
           </div>
+          <span className="text-[11px] text-[#333] font-medium absolute left-1/2 -translate-x-1/2">
+            terminal — portfolio
+          </span>
+          <div />
         </div>
 
         <TerminalWindow>
@@ -118,7 +107,10 @@ const Index = () => {
 
           {bootComplete && (
             <div className="animate-fade-in">
-              <CommandBar commands={commands} activeCommand={activeSection ?? undefined} />
+              <CommandBar
+                commands={commands}
+                activeCommand={activeSection ?? undefined}
+              />
 
               {activeSection === "about" && <AboutSection />}
               {activeSection === "projects" && <ProjectsSection />}
@@ -127,53 +119,54 @@ const Index = () => {
           )}
         </TerminalWindow>
 
-        <p className="text-center text-xs text-white/60 mt-6 drop-shadow">Built with ♥ and a terminal mindset</p>
+        <p className="text-center text-xs text-white/60 mt-6 drop-shadow">
+          Built with ♥ and a terminal mindset
+        </p>
       </div>
 
-      {/* Exit confirmation dialog */}
+      {/* Mac-style exit confirmation dialog */}
       {showExitConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
-          <div className="w-[360px] rounded shadow-xl overflow-hidden" style={{ fontFamily: "Tahoma, sans-serif" }}>
-            <div
-              className="h-[28px] flex items-center justify-between px-2"
-              style={{
-                background: "linear-gradient(180deg, #0A246A 0%, #3A6EA5 100%)",
-              }}
-            >
-              <span className="text-white text-[12px] font-bold">⚠️ 系统提示</span>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20">
+          <div
+            className="w-[340px] rounded-xl overflow-hidden shadow-2xl"
+            style={{
+              fontFamily: "'Lucida Grande', 'Helvetica Neue', sans-serif",
+              background: "linear-gradient(180deg, #ECECEC 0%, #D8D8D8 100%)",
+              border: "1px solid rgba(0,0,0,0.2)",
+            }}
+          >
+            <div className="p-6 text-center">
+              <div className="text-4xl mb-3">🤔</div>
+              <p className="text-[13px] font-semibold text-[#333] mb-1">
+                確定不想和他聊聊嗎？
+              </p>
+              <p className="text-[11px] text-[#666] leading-relaxed">
+                他人還挺有趣的～
+              </p>
+            </div>
+            <div className="flex justify-center gap-3 px-6 pb-5">
               <button
-                className="w-[18px] h-[18px] flex items-center justify-center text-white text-[11px] rounded-sm hover:bg-red-500"
+                className="px-5 py-[5px] text-[12px] rounded-md text-white font-medium"
                 style={{
-                  background: "linear-gradient(180deg, #C45156 0%, #B33B3F 100%)",
-                  border: "1px solid #8B2D30",
+                  background: "linear-gradient(180deg, #6CB3FA 0%, #2A7DE1 100%)",
+                  border: "1px solid #1B62C0",
+                  boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
                 }}
                 onClick={() => setShowExitConfirm(false)}
               >
-                ✕
+                繼續看看 →
               </button>
-            </div>
-            <div className="bg-[#ECE9D8] p-5">
-              <div className="flex gap-4 items-start">
-                <span className="text-3xl">🤔</span>
-                <div>
-                  <p className="text-[13px] text-[#000000] leading-relaxed font-medium">确定不想和他聊聊吗？</p>
-                  <p className="text-[11px] text-[#555555] mt-1">他人还挺有趣的～</p>
-                </div>
-              </div>
-              <div className="flex justify-end gap-2 mt-5">
-                <button
-                  className="px-4 py-1 text-[12px] bg-[#ECE9D8] border border-[#ACA899] rounded-sm hover:bg-[#DDD8C8]"
-                  onClick={() => setShowExitConfirm(false)}
-                >
-                  继续看看 →
-                </button>
-                <button
-                  className="px-4 py-1 text-[12px] bg-[#ECE9D8] border border-[#ACA899] rounded-sm hover:bg-[#DDD8C8]"
-                  onClick={() => navigate("/")}
-                >
-                  回到桌面
-                </button>
-              </div>
+              <button
+                className="px-5 py-[5px] text-[12px] rounded-md text-[#333] font-medium"
+                style={{
+                  background: "linear-gradient(180deg, #FAFAFA 0%, #E0E0E0 100%)",
+                  border: "1px solid #B0B0B0",
+                  boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
+                }}
+                onClick={() => navigate("/")}
+              >
+                回到桌面
+              </button>
             </div>
           </div>
         </div>
