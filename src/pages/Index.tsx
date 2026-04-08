@@ -6,6 +6,7 @@ import CommandBar from "@/components/CommandBar";
 import AboutSection from "@/components/sections/AboutSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import ThoughtsSection from "@/components/sections/ThoughtsSection";
+import StickyNote from "@/components/StickyNote";
 import macWallpaper from "@/assets/mac-wallpaper.jpg";
 import pixelAvatar from "@/assets/pixel-avatar.png";
 
@@ -50,6 +51,7 @@ const Index = () => {
   const [bootComplete, setBootComplete] = useState(false);
   const [activeSection, setActiveSection] = useState<Section>(null);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
+  const [showStickyNote, setShowStickyNote] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const handleBootComplete = useCallback(() => {
@@ -138,6 +140,20 @@ const Index = () => {
               <button
                 className="px-5 py-[5px] text-[12px] rounded-md text-[#333] font-medium"
                 style={{
+                  background: "linear-gradient(180deg, #FFFEA8 0%, #F5EC6A 100%)",
+                  border: "1px solid #D4C84A",
+                  boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
+                }}
+                onClick={() => {
+                  setShowExitConfirm(false);
+                  setShowStickyNote(true);
+                }}
+              >
+                留个言 🖊️
+              </button>
+              <button
+                className="px-5 py-[5px] text-[12px] rounded-md text-[#333] font-medium"
+                style={{
                   background: "linear-gradient(180deg, #FAFAFA 0%, #E0E0E0 100%)",
                   border: "1px solid #B0B0B0",
                   boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
@@ -149,6 +165,15 @@ const Index = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {showStickyNote && (
+        <StickyNote
+          onClose={() => setShowStickyNote(false)}
+          onSubmitted={() => {
+            setShowStickyNote(false);
+          }}
+        />
       )}
     </div>
   );
