@@ -4,6 +4,7 @@ import TypingAnimation from "@/components/TypingAnimation";
 import CommandBar from "@/components/CommandBar";
 import AboutSection from "@/components/sections/AboutSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
+import ThoughtsSection from "@/components/sections/ThoughtsSection";
 
 const bootLines = [
   { content: <span className="comment-text"># initializing portfolio...</span>, delay: 400 },
