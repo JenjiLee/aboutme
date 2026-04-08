@@ -37,7 +37,7 @@ const bootLines = [
   },
 ];
 
-type Section = "about" | "projects" | null;
+type Section = "about" | "projects" | "thoughts" | null;
 
 const Index = () => {
   const [bootComplete, setBootComplete] = useState(false);
@@ -50,6 +50,7 @@ const Index = () => {
   const commands = [
     { name: "about", description: "关于我", action: () => setActiveSection("about") },
     { name: "projects", description: "项目经历", action: () => setActiveSection("projects") },
+    { name: "thoughts", description: "产品思考", action: () => setActiveSection("thoughts") },
   ];
 
   return (
@@ -67,6 +68,7 @@ const Index = () => {
 
               {activeSection === "about" && <AboutSection />}
               {activeSection === "projects" && <ProjectsSection />}
+              {activeSection === "thoughts" && <ThoughtsSection />}
             </div>
           )}
         </TerminalWindow>
