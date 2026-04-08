@@ -8,77 +8,97 @@ interface Project {
   desc: string;
   tags: string[];
   thinking: string;
-  transition?: string; // 从上一个项目到这个项目的切换思考
+  transition?: string;
   highlights?: string[];
 }
 
-const projects: Project[] = [
+const workProjects: Project[] = [
   {
-    name: "AI 写作助手",
-    role: "产品负责人",
-    period: "2023 — 2024",
-    desc: "基于 LLM 的智能写作工具，支持多轮对话式内容生成与润色。DAU 峰值 50K+。",
-    tags: ["GPT-4", "Prompt Engineering", "B2C"],
+    name: "字节跳动 · 抖音",
+    role: "Agent 产品经理",
+    period: "2025.10 — 至今",
+    desc: "负责 C 端创作者 AI Agent 产品的回答质量与体验设计，完读率提升 10%+，人均对话数提升 5%+",
+    tags: ["C端 Agent", "SFT+RL", "评测体系", "体验设计"],
     thinking:
-      "当时市场上的 AI 写作工具大多是「一次性生成」的模式——用户输入 prompt，拿到结果，结束。但写作本质上是一个迭代过程。所以我们的核心设计理念是「对话式写作」：把 AI 当作一个协作者而非工具。这个思路后来被验证是对的，用户留存比同类产品高出 2 倍。",
+      "C 端 Agent 的核心挑战不是「能不能回答」，而是「用户愿不愿意读完、读完后会不会继续聊」。所以我定义了「清晰阅读→完整理解→触发追问」的体验漏斗，把完读率和下一轮对话率作为北极星指标。当 prompt 优化触及天花板后，推动了 SFT+RL 后训练路径，用用户真实追问行为作为正向反馈信号回流，让模型自己学会什么样的回答能引发深度对话。",
     highlights: [
-      "设计了「意图理解 → 草稿生成 → 多轮润色」的三层交互架构",
-      "通过 A/B 测试验证了对话式 UX 比一次性生成留存高 40%",
-      "主导 Prompt 工程策略，将输出质量评分从 3.2 提升到 4.1（满分 5）",
+      "定义回答容器的信息层级、结构化表达与可执行建议的呈现方式",
+      "推动统一所有语义场景下 generator 的 input 架构，收敛为可扩展的通用框架",
+      "推动垂类知识引入从 RAG 升级为 Skills，垂直场景输出质量评估提升 20%",
+      "建立分场景评测框架，从端到端结果评测升级为 Agent 轨迹评测",
+      "自主接入 CLI Skills 于 Codex，大幅提升效果迭代效率",
     ],
   },
   {
-    name: "企业知识库 Agent",
-    role: "产品经理",
-    period: "2024",
-    desc: "RAG + Agent 架构的企业内部知识问答系统，将内部信息检索效率提升 3x。",
-    tags: ["RAG", "LangChain", "B2B"],
+    name: "阿里巴巴 · ACCIO",
+    role: "AI 产品经理",
+    period: "2024.07 — 2025.10",
+    desc: "负责 Accio 从 AI 搜索引擎向 Agent 产品转型，Agent 模式上线后采购转化率提升 5%，DAU 增长 30%",
+    tags: ["B2B Agent", "商业化", "Stripe", "评测框架"],
     transition:
-      "从 C 端写作工具转向 B 端知识管理，是一个刻意的选择。在做写作助手的过程中我意识到：LLM 真正的杀手级应用不是「生成内容」，而是「理解和组织已有知识」。企业内部沉淀了大量非结构化信息，但员工找不到——这才是最大的痛点。",
+      "从字节的 C 端 Agent 回看阿里这段经历，B2B 采购场景是我理解 Agent 产品边界的关键一步。C 端追求的是「体验」，B 端追求的是「信任」——用户愿意让 Agent 代替自己做到哪一步？这个信任边界的设计思考贯穿了整个产品。",
     thinking:
-      "最大的挑战不是技术，而是信任。企业用户对 AI 生成的回答天然不信任，尤其涉及内部政策、流程时。所以我们做了一个关键设计：每个回答都附带「溯源链接」——你可以点击查看 AI 是从哪份文档的哪一段得出这个结论的。这一个设计让采纳率从 30% 飙升到 78%。",
+      "B2B 采购的核心矛盾是：用户需求复杂（材质、认证、MOQ、交期），但传统搜索只支持短词交互。Agent 的价值在于把复杂需求拆解为多步可执行的 plan。但关键设计决策是 Agent 的介入深度——从辅助选品延伸至主动联系供应商、自动发询盘，每一步都需要在用户信任边界内。商业化上，初期的 SaaS 次数制定价暴露了 Agent 场景的本质问题：单次任务复杂度方差极大，次数制无法反映真实成本与用户价值感知，推动了定价模型的根本性迭代。",
     highlights: [
-      "设计了可溯源的回答展示机制，每个结论标注出处文档和段落",
-      "构建了「知识新鲜度」评分系统，自动标记过期信息",
-      "推动分阶段上线策略：先 IT 部门验证，再推广至全公司",
-    ],
-  },
-  {
-    name: "AI Code Review 工具",
-    role: "产品设计",
-    period: "2024 — 至今",
-    desc: "面向开发者的 AI 辅助代码审查平台，集成 CI/CD 流程，降低 bug 率 40%。",
-    tags: ["DevTool", "CI/CD", "Claude API"],
-    transition:
-      "做完知识库项目后，我对「AI 如何融入已有工作流」这件事产生了很深的兴趣。开发者的代码审查流程是一个完美的切入点——它足够痛（耗时、容易遗漏）、足够标准化（有明确的输入输出）、而且开发者对 AI 的接受度最高。",
-    thinking:
-      "开发者是最挑剔的用户群体。他们不需要你告诉他「这段代码有问题」，他们需要你解释「为什么有问题」以及「怎么改更好」。所以我们的产品定位不是「自动修 bug」，而是「AI 代码导师」——它会像一个资深工程师一样给出建设性的 review 意见，而不是简单的 lint 规则。",
-    highlights: [
-      "设计了「严重度分级 + 修改建议」的双层反馈机制",
-      "将 AI Review 嵌入 PR 流程，零学习成本集成",
-      "通过 Claude API 实现上下文感知的代码理解，准确率 92%",
+      "设计 Agent 多步任务框架，包括 plan 的生成与用户编辑机制、各环节 function 的选择性透出策略",
+      "与算法团队共建 Agent 全机器评测框架，定义 Plan 与 Result 两层原子评估维度",
+      "从 0→1 构建 Agent 付费体系，完成 Stripe 支付链路打通，付费转化率 20%+",
+      "设计渐进式付费策略——基础功能免费体验，高级 function 设置付费墙",
     ],
   },
 ];
 
-const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+const internProject: Project = {
+  name: "真格基金",
+  role: "AIGC 投资分析师",
+  period: "2022.11 — 2023.05",
+  desc: "参与 AI 行业研究与 50+ AIGC 项目沟通，深度参与 2 个项目的全流程尽调与融资",
+  tags: ["VC", "AIGC", "行业研究", "尽调"],
+  thinking:
+    "VC 的经历让我建立了从市场和商业角度审视 AI 产品的视角。跟 50+ 创始人聊过之后，我发现大多数 AIGC 创业的失败不是技术问题，而是找不到真正的 PMF。这段经历深刻影响了我后来做产品的方式——永远先验证需求，再考虑技术方案。",
+  highlights: [
+    "覆盖文本、图片、视频、音频、3D 等多条技术线，社交、电商、游戏等多个场景",
+    "某 AIGC+社区项目 Pre-A 轮：发展路径明确，战略定位清晰",
+    "某智能场内物流 B 轮：未来生产方式变更，技术稀缺性高",
+  ],
+};
+
+interface SideProject {
+  name: string;
+  role: string;
+  period: string;
+  desc: string;
+}
+
+const sideProjects: SideProject[] = [
+  { name: "剪辑工具", role: "Creator", period: "2026.03", desc: "一天 Vibe Coding 生产软件，可实现批量剪辑操作+封面等操作" },
+  { name: "小微助理", role: "产品", period: "2023.07 — 2023.10", desc: "搭载在微信平台上的 AI 对话系统，面向小 B 商家与 KOL 对接问题" },
+  { name: "不绘 AI", role: "算法", period: "2022.11 — 2022.12", desc: "AIGC 文生图社区产品上线 & 拿到政府融资，基于 Stable Diffusion Fine-tune" },
+];
+
+interface Paper {
+  title: string;
+  period: string;
+  citation: string;
+}
+
+const papers: Paper[] = [
+  { title: "自动 Prompt 优化", period: "2022 — 2023", citation: "Y.Li, H.Huang, Auto-Prompt Optimization Through Definition and Error Correction, Preprint" },
+  { title: "跨模态检索", period: "2021 — 2022", citation: 'Y. Li et al., "NAC: Mitigating Noisy Correspondence in Cross-Modal Matching via Neighbor Auxiliary Corrector," ICASSP 2024' },
+];
+
+const ProjectCard = ({ project }: { project: Project }) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <div className="space-y-2">
-      {/* Transition thinking - 项目切换思考 */}
       {project.transition && (
         <div className="border-l-2 border-dashed border-muted-foreground/30 pl-4 py-2 mb-3">
-          <p className="comment-text text-xs leading-relaxed">
-            # 为什么转向这个方向？
-          </p>
-          <p className="text-xs text-muted-foreground leading-relaxed mt-1">
-            {project.transition}
-          </p>
+          <p className="comment-text text-xs leading-relaxed"># 转型思考</p>
+          <p className="text-xs text-muted-foreground leading-relaxed mt-1">{project.transition}</p>
         </div>
       )}
 
-      {/* Project header - clickable */}
       <div
         className="border-l-2 border-primary/30 pl-4 cursor-pointer group"
         onClick={() => setExpanded(!expanded)}
@@ -86,9 +106,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
         <div className="flex items-baseline justify-between flex-wrap gap-2">
           <div className="flex items-center gap-2">
             <ChevronRight
-              className={`w-3.5 h-3.5 text-primary transition-transform duration-200 ${
-                expanded ? "rotate-90" : ""
-              }`}
+              className={`w-3.5 h-3.5 text-primary transition-transform duration-200 ${expanded ? "rotate-90" : ""}`}
             />
             <span className="font-semibold text-foreground group-hover:text-primary transition-colors">
               {project.name}
@@ -100,35 +118,26 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
         <p className="text-sm mt-1 ml-5">{project.desc}</p>
         <div className="flex flex-wrap gap-1.5 mt-2 ml-5">
           {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-2 py-0.5 rounded text-xs border border-primary/20 text-primary bg-primary/5"
-            >
+            <span key={tag} className="px-2 py-0.5 rounded text-xs border border-primary/20 text-primary bg-primary/5">
               {tag}
             </span>
           ))}
         </div>
-
         <p className="text-xs text-muted-foreground mt-2 ml-5 group-hover:text-primary/70 transition-colors">
           {expanded ? "▾ 收起详情" : "▸ 点击展开详细思考 (cat README.md)"}
         </p>
       </div>
 
-      {/* Expanded detail */}
       {expanded && (
         <div className="ml-9 animate-fade-in space-y-3 pb-2">
           <div>
             <span className="prompt-symbol text-xs">❯ </span>
             <span className="text-xs font-medium">cat ./projects/{project.name}/README.md</span>
           </div>
-
-          {/* Thinking */}
           <div className="bg-secondary/50 rounded-md p-4 space-y-2">
             <p className="section-title text-sm">💭 产品思考</p>
             <p className="text-sm leading-relaxed">{project.thinking}</p>
           </div>
-
-          {/* Key highlights */}
           {project.highlights && project.highlights.length > 0 && (
             <div className="space-y-1.5">
               <p className="comment-text text-xs"># 关键成果</p>
@@ -140,10 +149,6 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
               ))}
             </div>
           )}
-
-          <div className="text-xs success-text">
-            ✓ README.md — {project.thinking.length + (project.highlights?.join("").length ?? 0)} chars loaded
-          </div>
         </div>
       )}
     </div>
@@ -155,21 +160,62 @@ const ProjectsSection = () => {
     <div className="animate-fade-in space-y-4 mt-4">
       <div>
         <span className="prompt-symbol">❯ </span>
-        <span className="font-medium">ls -la ./projects/</span>
+        <span className="font-medium">ls -la ./experience/</span>
       </div>
 
       <div className="ml-4 space-y-1">
-        <p className="section-title">## 项目经历</p>
-        <p className="comment-text text-xs"># 点击项目名称展开详细思考，项目间的虚线表示转型思考</p>
+        <p className="section-title">## 工作经历</p>
+        <p className="comment-text text-xs"># 点击项目名称展开详细思考</p>
       </div>
 
       <div className="ml-4 space-y-6">
-        {projects.map((project, i) => (
-          <ProjectCard key={i} project={project} index={i} />
+        {workProjects.map((project, i) => (
+          <ProjectCard key={i} project={project} />
         ))}
       </div>
 
-      <div className="mt-2 success-text text-xs">✓ {projects.length} projects found</div>
+      {/* Intern */}
+      <div className="ml-4 mt-6 space-y-1">
+        <p className="section-title">## 实习经历</p>
+      </div>
+      <div className="ml-4">
+        <ProjectCard project={internProject} />
+      </div>
+
+      {/* Side projects */}
+      <div className="ml-4 mt-6 space-y-1">
+        <p className="section-title">## 个人探索</p>
+      </div>
+      <div className="ml-4 space-y-3">
+        {sideProjects.map((p, i) => (
+          <div key={i} className="border-l-2 border-muted-foreground/20 pl-4">
+            <div className="flex items-baseline justify-between flex-wrap gap-2">
+              <span className="font-semibold text-foreground text-sm">{p.name}</span>
+              <span className="text-xs text-muted-foreground">{p.period}</span>
+            </div>
+            <p className="text-xs text-muted-foreground">{p.role}</p>
+            <p className="text-sm mt-0.5">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Papers */}
+      <div className="ml-4 mt-6 space-y-1">
+        <p className="section-title">## 科研成果</p>
+      </div>
+      <div className="ml-4 space-y-3">
+        {papers.map((p, i) => (
+          <div key={i} className="border-l-2 border-muted-foreground/20 pl-4">
+            <div className="flex items-baseline justify-between flex-wrap gap-2">
+              <span className="font-semibold text-foreground text-sm">{p.title}</span>
+              <span className="text-xs text-muted-foreground">{p.period}</span>
+            </div>
+            <p className="text-xs text-muted-foreground mt-0.5">{p.citation}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-2 success-text text-xs">✓ all records loaded</div>
     </div>
   );
 };
