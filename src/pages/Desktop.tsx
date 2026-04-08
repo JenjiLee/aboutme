@@ -48,8 +48,7 @@ const Desktop = () => {
       <div
         className="relative z-10 h-[22px] flex items-center justify-between px-3 text-[13px] font-medium"
         style={{
-          background: "linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(230,230,230,0.8) 100%)",
-          backdropFilter: "blur(20px)",
+          background: "linear-gradient(180deg, rgba(232,232,232,0.95) 0%, rgba(210,210,210,0.93) 100%)",
           borderBottom: "1px solid rgba(0,0,0,0.15)",
           fontFamily: "'Lucida Grande', 'Helvetica Neue', sans-serif",
         }}
@@ -109,8 +108,7 @@ const Desktop = () => {
         <div
           className="flex items-end gap-1 px-3 py-1 rounded-xl"
           style={{
-            background: "linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.12) 100%)",
-            backdropFilter: "blur(12px)",
+            background: "linear-gradient(180deg, rgba(200,210,220,0.55) 0%, rgba(180,190,200,0.35) 100%)",
             border: "1px solid rgba(255,255,255,0.3)",
             boxShadow: "0 2px 20px rgba(0,0,0,0.15)",
           }}
