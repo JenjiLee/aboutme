@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import pixelAvatar from "@/assets/pixel-avatar.png";
+import macWallpaper from "@/assets/mac-wallpaper.jpg";
 
 const Desktop = () => {
   const navigate = useNavigate();
@@ -11,23 +12,21 @@ const Desktop = () => {
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      setTime(
-        now.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" })
-      );
+      const weekdays = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
+      const m = now.getMonth() + 1;
+      const d = now.getDate();
+      const w = weekdays[now.getDay()];
+      const h = now.getHours().toString().padStart(2, "0");
+      const min = now.getMinutes().toString().padStart(2, "0");
+      setTime(`${w} ${m}月${d}日 ${h}:${min}`);
     };
     updateTime();
     const interval = setInterval(updateTime, 60000);
     return () => clearInterval(interval);
   }, []);
 
-  const handleIconDoubleClick = () => {
-    navigate("/terminal");
-  };
-
-  const handleIconClick = () => {
-    setSelected(true);
-  };
-
+  const handleIconDoubleClick = () => navigate("/terminal");
+  const handleIconClick = () => setSelected(true);
   const handleDesktopClick = (e: React.MouseEvent) => {
     if ((e.target as HTMLElement).closest(".desktop-icon")) return;
     setSelected(false);
@@ -36,174 +35,146 @@ const Desktop = () => {
   return (
     <div
       className="h-screen w-screen flex flex-col overflow-hidden select-none"
-      style={{
-        background: "linear-gradient(180deg, #245EDC 0%, #3A8BF5 30%, #87CEEB 55%, #B0E0F0 70%, #7CBA3F 70.1%, #5DA832 85%, #4A8C2A 100%)",
-      }}
       onClick={handleDesktopClick}
     >
-      {/* Clouds */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute animate-cloud-1"
-          style={{
-            top: "12%",
-            width: "200px",
-            height: "60px",
-            background: "radial-gradient(ellipse, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%)",
-            borderRadius: "50%",
-          }}
-        />
-        <div
-          className="absolute animate-cloud-2"
-          style={{
-            top: "22%",
-            width: "280px",
-            height: "80px",
-            background: "radial-gradient(ellipse, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 70%)",
-            borderRadius: "50%",
-          }}
-        />
-        <div
-          className="absolute animate-cloud-3"
-          style={{
-            top: "8%",
-            width: "160px",
-            height: "50px",
-            background: "radial-gradient(ellipse, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%)",
-            borderRadius: "50%",
-          }}
-        />
-      </div>
+      {/* Wallpaper */}
+      <img
+        src={macWallpaper}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+      />
 
-      {/* Desktop area */}
-      <div className="flex-1 relative p-6">
-        {/* Desktop Icon */}
-        <div
-          className="desktop-icon flex flex-col items-center gap-1 w-20 cursor-pointer"
-          onClick={handleIconClick}
-          onDoubleClick={handleIconDoubleClick}
-        >
-          <div
-            className={`p-1 rounded ${selected ? "bg-[#316AC5]/70 ring-1 ring-dotted ring-white/50" : ""}`}
-          >
-            <img
-              src={pixelAvatar}
-              alt="李郁青"
-              width={48}
-              height={48}
-              className="pixelated"
-              style={{ imageRendering: "pixelated" }}
-            />
-          </div>
-          <span
-            className={`text-[11px] text-center leading-tight px-1 ${
-              selected
-                ? "bg-[#316AC5] text-white"
-                : "text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
-            }`}
-            style={{ fontFamily: "Tahoma, sans-serif" }}
-          >
-            李郁青.exe
-          </span>
-        </div>
-      </div>
-
-      {/* Taskbar */}
+      {/* Menu Bar */}
       <div
-        className="h-[30px] flex items-center justify-between px-1"
+        className="relative z-10 h-[22px] flex items-center justify-between px-3 text-[13px] font-medium"
         style={{
-          background: "linear-gradient(180deg, #245EDC 0%, #1941A5 50%, #245EDC 100%)",
-          borderTop: "1px solid #5B9BE8",
+          background: "linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(230,230,230,0.8) 100%)",
+          backdropFilter: "blur(20px)",
+          borderBottom: "1px solid rgba(0,0,0,0.15)",
+          fontFamily: "'Lucida Grande', 'Helvetica Neue', sans-serif",
         }}
       >
-        {/* Start button */}
-        <button
-          className="h-[24px] flex items-center gap-1 px-3 rounded-r-lg text-white text-[11px] font-bold"
-          style={{
-            fontFamily: "Tahoma, sans-serif",
-            background: "linear-gradient(180deg, #3C8F3C 0%, #2D7B2D 50%, #236B23 100%)",
-            border: "1px solid #1A5C1A",
-            borderRadius: "0 8px 8px 0",
-          }}
-          onClick={() => setShowConfirm(true)}
-        >
-          <span className="text-[13px]">🪟</span>
-          start
-        </button>
-
-        {/* System tray */}
-        <div
-          className="h-[24px] flex items-center gap-2 px-3 text-white text-[11px]"
-          style={{
-            fontFamily: "Tahoma, sans-serif",
-            background: "linear-gradient(180deg, #1290E9 0%, #0C68B3 100%)",
-            borderLeft: "1px solid #0C5DA5",
-            borderRadius: "2px",
-          }}
-        >
+        <div className="flex items-center gap-4">
+          <span className="text-[15px] font-bold opacity-80"></span>
+          <span className="font-bold text-[13px]">Finder</span>
+          <span className="text-[#333] opacity-70">檔案</span>
+          <span className="text-[#333] opacity-70">編輯</span>
+          <span className="text-[#333] opacity-70">檢視</span>
+          <span className="text-[#333] opacity-70">前往</span>
+          <span className="text-[#333] opacity-70">輔助說明</span>
+        </div>
+        <div className="flex items-center gap-3 text-[12px] text-[#333]">
           <span>🔊</span>
           <span>{time}</span>
         </div>
       </div>
 
-      {/* Exit confirmation dialog */}
-      {showConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
+      {/* Desktop area */}
+      <div className="flex-1 relative">
+        {/* Desktop Icon — top right like Mac */}
+        <div className="absolute top-4 right-4 flex flex-col items-center gap-8">
           <div
-            className="w-[360px] rounded shadow-xl overflow-hidden"
-            style={{ fontFamily: "Tahoma, sans-serif" }}
+            className="desktop-icon flex flex-col items-center gap-1 cursor-pointer"
+            onClick={handleIconClick}
+            onDoubleClick={handleIconDoubleClick}
           >
-            {/* Title bar */}
             <div
-              className="h-[28px] flex items-center justify-between px-2"
-              style={{
-                background: "linear-gradient(180deg, #0A246A 0%, #3A6EA5 100%)",
+              className={`p-2 rounded-lg ${selected ? "bg-[#3875D7]/40 ring-2 ring-[#3875D7]/60" : ""}`}
+            >
+              <img
+                src={pixelAvatar}
+                alt="李郁青"
+                width={52}
+                height={52}
+                className="pixelated drop-shadow-lg"
+                style={{ imageRendering: "pixelated" }}
+              />
+            </div>
+            <span
+              className={`text-[11px] text-center leading-tight px-2 py-[1px] rounded ${
+                selected
+                  ? "bg-[#3875D7] text-white"
+                  : "text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]"
+              }`}
+              style={{ fontFamily: "'Lucida Grande', sans-serif" }}
+            >
+              李郁青.exe
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Dock */}
+      <div className="relative z-10 flex justify-center pb-1">
+        <div
+          className="flex items-end gap-1 px-3 py-1 rounded-xl"
+          style={{
+            background: "linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.12) 100%)",
+            backdropFilter: "blur(12px)",
+            border: "1px solid rgba(255,255,255,0.3)",
+            boxShadow: "0 2px 20px rgba(0,0,0,0.15)",
+          }}
+        >
+          {["📁", "🌐", "📧", "⚙️", "🗑️"].map((icon, i) => (
+            <div
+              key={i}
+              className="w-10 h-10 flex items-center justify-center text-[24px] hover:scale-125 transition-transform duration-150 cursor-pointer"
+              onClick={() => {
+                if (icon === "📁") navigate("/terminal");
               }}
             >
-              <span className="text-white text-[12px] font-bold">⚠️ 系统提示</span>
+              {icon}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Mac-style confirm dialog */}
+      {showConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20">
+          <div
+            className="w-[340px] rounded-xl overflow-hidden shadow-2xl"
+            style={{
+              fontFamily: "'Lucida Grande', 'Helvetica Neue', sans-serif",
+              background: "linear-gradient(180deg, #ECECEC 0%, #D8D8D8 100%)",
+              border: "1px solid rgba(0,0,0,0.2)",
+            }}
+          >
+            <div className="p-6 text-center">
+              <div className="text-4xl mb-3">🤔</div>
+              <p className="text-[13px] font-semibold text-[#333] mb-1">
+                確定不想和他聊聊嗎？
+              </p>
+              <p className="text-[11px] text-[#666] leading-relaxed">
+                雙擊桌面上的「李郁青.exe」可以打開簡歷終端哦
+              </p>
+            </div>
+            <div className="flex justify-center gap-3 px-6 pb-5">
               <button
-                className="w-[18px] h-[18px] flex items-center justify-center text-white text-[11px] rounded-sm hover:bg-red-500"
+                className="px-5 py-[5px] text-[12px] rounded-md text-white font-medium"
                 style={{
-                  background: "linear-gradient(180deg, #C45156 0%, #B33B3F 100%)",
-                  border: "1px solid #8B2D30",
+                  background: "linear-gradient(180deg, #6CB3FA 0%, #2A7DE1 100%)",
+                  border: "1px solid #1B62C0",
+                  boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
+                }}
+                onClick={() => {
+                  setShowConfirm(false);
+                  navigate("/terminal");
+                }}
+              >
+                去看看 →
+              </button>
+              <button
+                className="px-5 py-[5px] text-[12px] rounded-md text-[#333] font-medium"
+                style={{
+                  background: "linear-gradient(180deg, #FAFAFA 0%, #E0E0E0 100%)",
+                  border: "1px solid #B0B0B0",
+                  boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
                 }}
                 onClick={() => setShowConfirm(false)}
               >
-                ✕
+                再想想
               </button>
-            </div>
-
-            {/* Body */}
-            <div className="bg-[#ECE9D8] p-5">
-              <div className="flex gap-4 items-start">
-                <span className="text-3xl">🤔</span>
-                <div>
-                  <p className="text-[13px] text-[#000000] leading-relaxed font-medium">
-                    确定不想和他聊聊吗？
-                  </p>
-                  <p className="text-[11px] text-[#555555] mt-1 leading-relaxed">
-                    双击桌面上的「李郁青.exe」可以打开简历终端哦
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex justify-end gap-2 mt-5">
-                <button
-                  className="px-4 py-1 text-[12px] bg-[#ECE9D8] border border-[#ACA899] rounded-sm hover:bg-[#DDD8C8] active:border-[#888]"
-                  onClick={() => {
-                    setShowConfirm(false);
-                    navigate("/terminal");
-                  }}
-                >
-                  去看看 →
-                </button>
-                <button
-                  className="px-4 py-1 text-[12px] bg-[#ECE9D8] border border-[#ACA899] rounded-sm hover:bg-[#DDD8C8] active:border-[#888]"
-                  onClick={() => setShowConfirm(false)}
-                >
-                  再想想
-                </button>
-              </div>
             </div>
           </div>
         </div>
