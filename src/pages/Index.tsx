@@ -101,9 +101,6 @@ const Index = () => {
           )}
         </TerminalWindow>
 
-        <p className="text-center text-xs text-white/60 mt-6 drop-shadow">
-          Built with ♥ and a terminal mindset
-        </p>
       </div>
 
       {/* Mac-style exit confirmation dialog */}
