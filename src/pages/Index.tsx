@@ -28,7 +28,7 @@ const bootLines = [
   {
     content: (
       <p className="text-sm text-muted-foreground mt-2">
-        "2年 AI PM，专注垂类 Agent 产品定义、效果优化与商业化全链路。"
+        "我们正站在科技与人文的十字路口～"
       </p>
     ),
     delay: 400,
