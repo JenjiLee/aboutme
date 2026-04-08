@@ -1,13 +1,17 @@
-import { useState, useEffect } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import pixelAvatar from "@/assets/pixel-avatar.png";
 import macWallpaper from "@/assets/mac-wallpaper.jpg";
 
-const Desktop = () => {
+interface DesktopProps {
+  children?: ReactNode;
+}
+
+const Desktop = ({ children }: DesktopProps) => {
   const navigate = useNavigate();
   const [showConfirm, setShowConfirm] = useState(false);
   const [time, setTime] = useState("");
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState<string | null>(null);
 
   useEffect(() => {
     const updateTime = () => {
@@ -25,16 +29,49 @@ const Desktop = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleIconDoubleClick = () => navigate("/terminal");
-  const handleIconClick = () => setSelected(true);
+  const handleIconDoubleClick = (path: string) => navigate(path);
+  const handleIconClick = (id: string) => setSelected(id);
   const handleDesktopClick = (e: React.MouseEvent) => {
     if ((e.target as HTMLElement).closest(".desktop-icon")) return;
-    setSelected(false);
+    setSelected(null);
   };
+
+  const desktopIcons = [
+    {
+      id: "resume",
+      label: "李郁青.app",
+      path: "/terminal",
+      artwork: (
+        <img
+          src={pixelAvatar}
+          alt="李郁青"
+          width={52}
+          height={52}
+          className="pixelated drop-shadow-lg"
+          style={{ imageRendering: "pixelated" }}
+        />
+      ),
+    },
+    {
+      id: "guestbook",
+      label: "留言箱.app",
+      path: "/guestbook",
+      artwork: (
+        <div
+          className="flex h-[52px] w-[52px] items-center justify-center rounded-[14px] border border-white/60 text-[28px] shadow-lg"
+          style={{
+            background: "linear-gradient(180deg, rgba(255,250,196,0.98) 0%, rgba(255,233,128,0.95) 100%)",
+          }}
+        >
+          💌
+        </div>
+      ),
+    },
+  ];
 
   return (
     <div
-      className="h-screen w-screen flex flex-col overflow-hidden select-none"
+      className="relative h-screen w-screen flex flex-col overflow-hidden select-none"
       onClick={handleDesktopClick}
     >
       {/* Wallpaper */}
@@ -72,34 +109,32 @@ const Desktop = () => {
       <div className="flex-1 relative">
         {/* Desktop Icon — top right like Mac */}
         <div className="absolute top-4 right-4 flex flex-col items-center gap-8">
-          <div
-            className="desktop-icon flex flex-col items-center gap-1 cursor-pointer"
-            onClick={handleIconClick}
-            onDoubleClick={handleIconDoubleClick}
-          >
+          {desktopIcons.map((icon) => (
             <div
-              className={`p-2 rounded-lg ${selected ? "bg-[#3875D7]/40 ring-2 ring-[#3875D7]/60" : ""}`}
+              key={icon.id}
+              className="desktop-icon flex flex-col items-center gap-1 cursor-pointer"
+              onClick={() => handleIconClick(icon.id)}
+              onDoubleClick={() => handleIconDoubleClick(icon.path)}
             >
-              <img
-                src={pixelAvatar}
-                alt="李郁青"
-                width={52}
-                height={52}
-                className="pixelated drop-shadow-lg"
-                style={{ imageRendering: "pixelated" }}
-              />
+              <div
+                className={`p-2 rounded-lg ${
+                  selected === icon.id ? "bg-[#3875D7]/40 ring-2 ring-[#3875D7]/60" : ""
+                }`}
+              >
+                {icon.artwork}
+              </div>
+              <span
+                className={`text-[11px] text-center leading-tight px-2 py-[1px] rounded ${
+                  selected === icon.id
+                    ? "bg-[#3875D7] text-white"
+                    : "text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]"
+                }`}
+                style={{ fontFamily: "'Lucida Grande', sans-serif" }}
+              >
+                {icon.label}
+              </span>
             </div>
-            <span
-              className={`text-[11px] text-center leading-tight px-2 py-[1px] rounded ${
-                selected
-                  ? "bg-[#3875D7] text-white"
-                  : "text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]"
-              }`}
-              style={{ fontFamily: "'Lucida Grande', sans-serif" }}
-            >
-              李郁青.app
-            </span>
-          </div>
+          ))}
         </div>
       </div>
 
@@ -123,6 +158,14 @@ const Desktop = () => {
           ))}
         </div>
       </div>
+
+      {children && (
+        <div className="pointer-events-none absolute inset-0 z-30 flex items-start justify-center overflow-y-auto p-3 pt-8 sm:items-center sm:p-8">
+          <div className="pointer-events-auto w-full max-w-2xl">
+            {children}
+          </div>
+        </div>
+      )}
 
       {/* Mac-style confirm dialog */}
       {showConfirm && (

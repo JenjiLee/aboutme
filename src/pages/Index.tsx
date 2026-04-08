@@ -7,7 +7,6 @@ import AboutSection from "@/components/sections/AboutSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import ThoughtsSection from "@/components/sections/ThoughtsSection";
 import StickyNote from "@/components/StickyNote";
-import macWallpaper from "@/assets/mac-wallpaper.jpg";
 import pixelAvatar from "@/assets/pixel-avatar.png";
 
 const bootLines = [
@@ -77,14 +76,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 sm:p-8 relative">
-      {/* Mac wallpaper background */}
-      <img
-        src={macWallpaper}
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-
+    <div className="relative z-10">
       <div className={`w-full ${isFullscreen ? "" : "max-w-2xl"} relative z-10`}>
         <TerminalWindow onClose={handleClose} onMinimize={handleMinimize} onFullscreen={handleFullscreen} isFullscreen={isFullscreen}>
           <TypingAnimation lines={bootLines} onComplete={handleBootComplete} />
@@ -127,17 +119,6 @@ const Index = () => {
             </div>
             <div className="flex justify-center gap-3 px-6 pb-5">
               <button
-                className="px-5 py-[5px] text-[12px] rounded-md text-white font-medium"
-                style={{
-                  background: "linear-gradient(180deg, #6CB3FA 0%, #2A7DE1 100%)",
-                  border: "1px solid #1B62C0",
-                  boxShadow: "0 1px 2px rgba(0,0,0,0.15)",
-                }}
-                onClick={() => setShowExitConfirm(false)}
-              >
-                繼續看看 →
-              </button>
-              <button
                 className="px-5 py-[5px] text-[12px] rounded-md text-[#333] font-medium"
                 style={{
                   background: "linear-gradient(180deg, #FFFEA8 0%, #F5EC6A 100%)",
@@ -172,6 +153,7 @@ const Index = () => {
           onClose={() => setShowStickyNote(false)}
           onSubmitted={() => {
             setShowStickyNote(false);
+            navigate("/");
           }}
         />
       )}

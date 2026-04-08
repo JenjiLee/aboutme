@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Desktop from "./pages/Desktop.tsx";
+import Guestbook from "./pages/Guestbook.tsx";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -17,7 +18,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Desktop />} />
-          <Route path="/terminal" element={<Index />} />
+          <Route path="/terminal" element={<Desktop><Index /></Desktop>} />
+          <Route path="/guestbook" element={<Desktop><Guestbook /></Desktop>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

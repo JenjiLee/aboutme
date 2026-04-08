@@ -11,7 +11,13 @@ interface TerminalWindowProps {
 
 const TerminalWindow = ({ title = "terminal — portfolio", children, onClose, onMinimize, onFullscreen, isFullscreen }: TerminalWindowProps) => {
   return (
-    <div className={`terminal-window ${isFullscreen ? "fixed inset-0 z-40 !rounded-none !max-w-none" : ""}`}>
+    <div
+      className={`terminal-window flex flex-col ${
+        isFullscreen
+          ? "fixed inset-0 z-40 !rounded-none !max-w-none"
+          : "window-enter h-[min(720px,calc(100vh-4.5rem))] sm:h-[min(760px,calc(100vh-7rem))]"
+      }`}
+    >
       <div className={`terminal-header ${isFullscreen ? "!rounded-none" : ""}`}>
         <div className="flex items-center gap-[6px]">
           <button
@@ -32,7 +38,11 @@ const TerminalWindow = ({ title = "terminal — portfolio", children, onClose, o
         </div>
         <span className="ml-3 text-xs text-muted-foreground font-mono">{title}</span>
       </div>
-      <div className={`terminal-body ${isFullscreen ? "h-[calc(100vh-36px)] overflow-auto" : ""}`}>
+      <div
+        className={`terminal-body flex-1 overflow-y-auto ${
+          isFullscreen ? "h-[calc(100vh-36px)]" : "min-h-0"
+        }`}
+      >
         {children}
       </div>
     </div>
