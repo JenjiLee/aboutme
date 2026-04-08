@@ -46,6 +46,7 @@ const Index = () => {
   const [bootComplete, setBootComplete] = useState(false);
   const [activeSection, setActiveSection] = useState<Section>(null);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const handleBootComplete = useCallback(() => {
     setBootComplete(true);
@@ -61,6 +62,14 @@ const Index = () => {
     setShowExitConfirm(true);
   };
 
+  const handleMinimize = () => {
+    navigate("/");
+  };
+
+  const handleFullscreen = () => {
+    setIsFullscreen((prev) => !prev);
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4 sm:p-8 relative">
       {/* Mac wallpaper background */}
@@ -70,8 +79,8 @@ const Index = () => {
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      <div className="w-full max-w-2xl relative z-10">
-        <TerminalWindow onClose={handleClose}>
+      <div className={`w-full ${isFullscreen ? "" : "max-w-2xl"} relative z-10`}>
+        <TerminalWindow onClose={handleClose} onMinimize={handleMinimize} onFullscreen={handleFullscreen} isFullscreen={isFullscreen}>
           <TypingAnimation lines={bootLines} onComplete={handleBootComplete} />
 
           {bootComplete && (
