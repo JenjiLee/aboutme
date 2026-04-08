@@ -16,8 +16,8 @@ const bootLines = [
   {
     content: (
       <div className="space-y-1 mt-2">
-        <p className="text-lg font-bold text-foreground">👋 你好，我是 [你的名字]</p>
-        <p className="text-muted-foreground">AI Product Manager · Builder · 技术产品人</p>
+        <p className="text-lg font-bold text-foreground">👋 你好，我是李郁青</p>
+        <p className="text-muted-foreground">AI Product Manager · Agent 产品 · 清华硕士</p>
       </div>
     ),
     delay: 500,
@@ -25,7 +25,7 @@ const bootLines = [
   {
     content: (
       <p className="text-sm text-muted-foreground mt-2">
-        "最好的产品，是让用户感受不到技术的存在。"
+        "2年 AI PM，专注垂类 Agent 产品定义、效果优化与商业化全链路。"
       </p>
     ),
     delay: 400,
