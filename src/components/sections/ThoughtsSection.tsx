@@ -27,7 +27,7 @@ const threads: ThoughtThread[] = [
     title: "战略判断",
     command: "strategy.md",
     emoji: "🎯",
-    summary: "模型幻觉很大，且一时难以消除。娱乐向产品利用幻觉，可以巧妙",
+    summary: "模型幻觉很大，且一时难以消除。娱乐向产品可以巧妙利用幻觉",
     bullets: [
       "当时的判断：模型幻觉比现在还要大，短期内无法消除",
       "娱乐向产品可以巧妙利用幻觉——AI 的「不确定性」在创意场景反而是优势",
@@ -35,7 +35,7 @@ const threads: ThoughtThread[] = [
     ],
   },
   {
-    title: "AI 社交 (0→1)",
+    title: "AI 社交",
     command: "ai-social.md",
     emoji: "💬",
     summary: "腾讯社交线的三座大山、陪伴产品的复盘与回看",
@@ -48,7 +48,7 @@ const threads: ThoughtThread[] = [
     ],
   },
   {
-    title: "落地的故事",
+    title: "AI电商",
     command: "landing.md",
     emoji: "🚀",
     summary: "save time vs kill time，电商素材，AI 模特的 2B2C 端水",
@@ -71,7 +71,6 @@ const threads: ThoughtThread[] = [
       "先上线 → 无监督聚类意图 → 找到高频意图 → 市场 & 运营宣发",
       "不预设用户是否需要经历长时间得到好效果，还是短时间得到一般效果",
       "商业化方式会一定程度影响产品框架——定价模型决定了用户使用行为和产品边界",
-      "Skills 出现后，垂类产品的价值将被磨平？暴论与否，关键在评测——只有垂直领域的人才能定义好什么是「好结果」，评测本身就是壁垒",
     ],
   },
   {
@@ -94,18 +93,13 @@ const ThoughtCard = ({ thread }: { thread: ThoughtThread }) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div
-      className="border-l-2 border-primary/30 pl-4 cursor-pointer group"
-      onClick={() => setExpanded(!expanded)}
-    >
+    <div className="border-l-2 border-primary/30 pl-4 cursor-pointer group" onClick={() => setExpanded(!expanded)}>
       <div className="flex items-center gap-2">
         <ChevronRight
           className={`w-3.5 h-3.5 text-primary transition-transform duration-200 ${expanded ? "rotate-90" : ""}`}
         />
         <span className="text-base">{thread.emoji}</span>
-        <span className="font-semibold text-foreground group-hover:text-primary transition-colors">
-          {thread.title}
-        </span>
+        <span className="font-semibold text-foreground group-hover:text-primary transition-colors">{thread.title}</span>
       </div>
       <p className="text-sm text-muted-foreground mt-0.5 ml-5">{thread.summary}</p>
       <p className="text-xs text-muted-foreground mt-1 ml-5 group-hover:text-primary/70 transition-colors">
