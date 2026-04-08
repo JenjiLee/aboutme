@@ -6,6 +6,7 @@ import CommandBar from "@/components/CommandBar";
 import AboutSection from "@/components/sections/AboutSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import ThoughtsSection from "@/components/sections/ThoughtsSection";
+import StickyNote from "@/components/StickyNote";
 import macWallpaper from "@/assets/mac-wallpaper.jpg";
 import pixelAvatar from "@/assets/pixel-avatar.png";
 
@@ -50,6 +51,7 @@ const Index = () => {
   const [bootComplete, setBootComplete] = useState(false);
   const [activeSection, setActiveSection] = useState<Section>(null);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
+  const [showStickyNote, setShowStickyNote] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const handleBootComplete = useCallback(() => {
