@@ -147,3 +147,32 @@
   from { width: 0; }
   to { width: 100%; }
 }
+
+@keyframes cloud-drift-1 {
+  0% { left: -200px; }
+  100% { left: 110%; }
+}
+
+@keyframes cloud-drift-2 {
+  0% { left: -280px; }
+  100% { left: 110%; }
+}
+
+@keyframes cloud-drift-3 {
+  0% { left: 110%; }
+  100% { left: -160px; }
+}
+
+.animate-cloud-1 {
+  animation: cloud-drift-1 45s linear infinite;
+}
+
+.animate-cloud-2 {
+  animation: cloud-drift-2 60s linear infinite;
+  animation-delay: -20s;
+}
+
+.animate-cloud-3 {
+  animation: cloud-drift-3 55s linear infinite;
+  animation-delay: -10s;
+}
