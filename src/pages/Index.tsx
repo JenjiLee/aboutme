@@ -71,38 +71,7 @@ const Index = () => {
       />
 
       <div className="w-full max-w-2xl relative z-10">
-        {/* Mac-style window title bar */}
-        <div
-          className="h-[22px] flex items-center justify-between px-3 rounded-t-lg"
-          style={{
-            background: "linear-gradient(180deg, rgba(200,200,200,0.95) 0%, rgba(170,170,170,0.9) 100%)",
-            backdropFilter: "blur(10px)",
-            borderBottom: "1px solid rgba(0,0,0,0.1)",
-            fontFamily: "'Lucida Grande', 'Helvetica Neue', sans-serif",
-          }}
-        >
-          <div className="flex items-center gap-[6px]">
-            <button
-              className="w-[12px] h-[12px] rounded-full bg-[#FF5F57] border border-[#E33E32] hover:brightness-90"
-              title="关闭"
-              onClick={handleClose}
-            />
-            <button
-              className="w-[12px] h-[12px] rounded-full bg-[#FEBC2E] border border-[#E5A00D]"
-              title="最小化"
-            />
-            <button
-              className="w-[12px] h-[12px] rounded-full bg-[#28C840] border border-[#1AAB29]"
-              title="最大化"
-            />
-          </div>
-          <span className="text-[11px] text-[#333] font-medium absolute left-1/2 -translate-x-1/2">
-            terminal — portfolio
-          </span>
-          <div />
-        </div>
-
-        <TerminalWindow>
+        <TerminalWindow onClose={handleClose}>
           <TypingAnimation lines={bootLines} onComplete={handleBootComplete} />
 
           {bootComplete && (
